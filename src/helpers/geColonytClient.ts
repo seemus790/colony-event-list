@@ -11,11 +11,11 @@ const provider = new providers.InfuraProvider();
 const wallet = Wallet.createRandom().connect(provider);
 
 export async function geColonytClient() {
-  const networkClient = await getColonyNetworkClient(Network.Mainnet, wallet, {
+  const colonyNetworkClient = getColonyNetworkClient(Network.Mainnet, wallet, {
     networkAddress: MAINNET_NETWORK_ADDRESS,
   });
 
-  const colonyClient = await networkClient.getColonyClient(
+  const colonyClient = await colonyNetworkClient.getColonyClient(
     MAINNET_BETACOLONY_ADDRESS
   );
 
