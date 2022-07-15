@@ -1,12 +1,16 @@
 import { useEffect, useState } from "react";
-import { getLogs, getBlockTime } from "@colony/colony-js";
+import { getLogs, getBlockTime, AnyColonyClient } from "@colony/colony-js";
 import { Filter } from "@ethersproject/providers";
-import { geColonytClient, provider } from "../../helpers/geColonytClient";
 import { ColonyEvent } from "../../types/colonyEvent";
+import {
+  useColonyClient,
+  provider,
+} from "../../providers/ColonyClientProvider/ColonyClientProvider";
 
-async function getEventsByEventType(type: ColonyEvent["type"]) {
-  const client = await geColonytClient();
-
+const getEventsByEventType = async (
+  client: AnyColonyClient,
+  type: ColonyEvent["type"]
+) => {
   let filter: Filter;
 
   switch (type) {
@@ -36,23 +40,27 @@ async function getEventsByEventType(type: ColonyEvent["type"]) {
       parsedLog: client.interface.parseLog(log),
     }))
   );
-}
+};
 
 export function useEvents() {
-  const [error, setError] = useState<Error>();
   const [events, setEvents] = useState<ColonyEvent[]>([]);
   const [loading, setIsLoading] = useState(true);
+  const { client } = useColonyClient();
 
   useEffect(() => {
     async function load() {
+      if (!client) {
+        return;
+      }
+
       setIsLoading(true);
 
       const eventLogs = await Promise.all([
-        getEventsByEventType("ColonyInitialised"),
-        getEventsByEventType("DomainAdded"),
+        getEventsByEventType(client, "ColonyInitialised"),
+        getEventsByEventType(client, "DomainAdded"),
         // TODO: Here we hit insura rate limit (429 Too Many Requests)?
-        // getEventsByEventType("PayoutClaimed"),
-        getEventsByEventType("TaskRoleUserSet"),
+        // getEventsByEventType(client, "PayoutClaimed"),
+        getEventsByEventType(client, "TaskRoleUserSet"),
       ]);
 
       const sortedEventLogs = eventLogs
@@ -65,10 +73,9 @@ export function useEvents() {
     }
 
     load();
-  }, [setError]);
+  }, [client]);
 
   return {
-    error,
     events,
     loading,
   };
