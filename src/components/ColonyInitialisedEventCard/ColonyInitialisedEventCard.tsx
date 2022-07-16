@@ -11,7 +11,7 @@ export function ColonyInitialisedEventCard({
 }: ColonyInitialisedEventCardProps) {
   return (
     <EventCard event={event}>
-      <h1>Congratulations! It's a beautiful baby colony!</h1>
+      <span>Congratulations! It's a beautiful baby colony!</span>
     </EventCard>
   );
 }

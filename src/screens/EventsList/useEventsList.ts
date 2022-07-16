@@ -35,14 +35,16 @@ const getEventsByEventType = async (
   return await Promise.all(
     logs.map(async (log) => ({
       type,
-      logTime: await getBlockTime(provider, log.blockHash),
+      // TODO: Here we hit insura rate limit (429 Too Many Requests)?
+      // logTime: await getBlockTime(provider, log.blockHash),
+      logTime: 1,
       rawLog: log,
       parsedLog: client.interface.parseLog(log),
     }))
   );
 };
 
-export function useEvents() {
+export function useEventsList() {
   const [events, setEvents] = useState<ColonyEvent[]>([]);
   const [loading, setIsLoading] = useState(true);
   const { client } = useColonyClient();
@@ -58,8 +60,7 @@ export function useEvents() {
       const eventLogs = await Promise.all([
         getEventsByEventType(client, "ColonyInitialised"),
         getEventsByEventType(client, "DomainAdded"),
-        // TODO: Here we hit insura rate limit (429 Too Many Requests)?
-        // getEventsByEventType(client, "PayoutClaimed"),
+        getEventsByEventType(client, "PayoutClaimed"),
         getEventsByEventType(client, "TaskRoleUserSet"),
       ]);
 

@@ -4,7 +4,8 @@ import { DomainAddedEventCard } from "../../components/DomainAddedEventCard/Doma
 import { PayoutClaimedEventCard } from "../../components/PayoutClaimedEventCard/PayoutClaimedEventCard";
 import { TaskRoleUserSetEventCard } from "../../components/TaskRoleUserSetEventCard/TaskRoleUserSetEventCard";
 import { ColonyEvent } from "../../types/colonyEvent";
-import { useEvents } from "./useEvents";
+import { useEventsList } from "./useEventsList";
+import styles from "./EventsList.module.css";
 
 function renderEvent(event: ColonyEvent) {
   switch (event.type) {
@@ -21,14 +22,18 @@ function renderEvent(event: ColonyEvent) {
   }
 }
 
-export function Events() {
-  const { events } = useEvents();
+export function EventsList() {
+  const { events } = useEventsList();
 
   return (
-    <ul>
-      {events.map((event) => (
-        <li key={event.rawLog.transactionHash}>{renderEvent(event)}</li>
-      ))}
-    </ul>
+    <div className={styles.root}>
+      <ol className={styles.list}>
+        {events.map((event) => (
+          <li key={event.rawLog.transactionHash} className={styles.listItem}>
+            {renderEvent(event)}
+          </li>
+        ))}
+      </ol>
+    </div>
   );
 }

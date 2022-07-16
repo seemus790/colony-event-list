@@ -1,5 +1,5 @@
 import React from "react";
-import { ColonyRole } from "@colony/colony-js";
+import { ValueText } from "../ValueText/ValueText";
 import { EventCard } from "../EventCard/EventCard";
 import { DomainAddedEvent } from "../../types/colonyEvent";
 
@@ -9,11 +9,13 @@ interface DomainAddedEventCardProps {
 
 export function DomainAddedEventCard({ event }: DomainAddedEventCardProps) {
   // TODO: Can we type `args`?
-  const domainId = event.parsedLog.args?.domainId.toNumber();
+  const domainId = event.parsedLog.args.domainId.toString();
 
   return (
     <EventCard event={event}>
-      <h1>Domain {ColonyRole[domainId]} added.</h1>
+      <span>
+        Domain <ValueText>{domainId}</ValueText> added.
+      </span>
     </EventCard>
   );
 }
