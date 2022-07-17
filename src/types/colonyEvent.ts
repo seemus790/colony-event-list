@@ -19,12 +19,12 @@ export interface PayoutClaimedEvent extends Event {
   type: "PayoutClaimed";
 }
 
-export interface TaskRoleUserSetEvent extends Event {
-  type: "TaskRoleUserSet";
+export interface ColonyRoleSetEvent extends Event {
+  type: "ColonyRoleSet";
 }
 
 export type ColonyEvent =
   | ColonyInitialisedEvent
   | DomainAddedEvent
   | PayoutClaimedEvent
-  | TaskRoleUserSetEvent;
+  | ColonyRoleSetEvent;

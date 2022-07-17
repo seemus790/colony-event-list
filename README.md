@@ -6,7 +6,6 @@
 - Ues error boundaries for graceful failures
 - Add examples on unit tests
 - Add "expaded" state for `<EventCard />`
-- Handle `ColonyRoleSet` event with colony-js@^5.1.1
 
 # Getting Started with Create React App
 

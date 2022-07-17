@@ -23,8 +23,10 @@ const getEventsByEventType = async (
     case "PayoutClaimed":
       filter = client.filters.PayoutClaimed();
       break;
-    case "TaskRoleUserSet":
-      filter = client.filters.TaskRoleUserSet();
+    case "ColonyRoleSet":
+      // TODO: Something wrong with the library types?
+      // Property 'ColonyRoleSet' does not exist on type ...
+      filter = (client.filters as any).ColonyRoleSet();
       break;
     default:
       throw new Error("ERR:UNKNOWN_EVENT_TYPE");
@@ -64,7 +66,7 @@ export const useEventsList = () => {
         getEventsByEventType(client, "ColonyInitialised"),
         getEventsByEventType(client, "DomainAdded"),
         getEventsByEventType(client, "PayoutClaimed"),
-        getEventsByEventType(client, "TaskRoleUserSet"),
+        getEventsByEventType(client, "ColonyRoleSet"),
       ]);
 
       const sortedEventLogs = eventLogs
