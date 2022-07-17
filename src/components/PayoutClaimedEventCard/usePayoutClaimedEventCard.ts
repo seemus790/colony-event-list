@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
+import { BigNumber } from "ethers";
 import { addressToTokenSymbol } from "../../helpers/addressToTokenSymbol";
 import { useColonyClient } from "../../providers/ColonyClientProvider/ColonyClientProvider";
 import { PayoutClaimedEvent } from "../../types/colonyEvent";
+
+const wei = BigNumber.from(10);
 
 interface UsePayoutClaimedEventCardOptions {
   event: PayoutClaimedEvent;
@@ -14,7 +17,7 @@ export const usePayoutClaimedEventCard = ({
   const [loading, setLoading] = useState(true);
   const [userAddress, setUserAddress] = useState<string>();
 
-  const amount = event.parsedLog.args.amount.toString();
+  const amount = event.parsedLog.args.amount.div(wei.pow(18)).toString();
   // TODO: Can we type `args`?
   const token = addressToTokenSymbol(event.parsedLog.args.token as string);
   const fundingPotId = event.parsedLog.args.fundingPotId.toString();
