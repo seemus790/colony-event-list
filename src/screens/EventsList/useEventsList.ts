@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { getLogs, getBlockTime, AnyColonyClient } from "@colony/colony-js";
 import { Filter } from "@ethersproject/providers";
 import { ColonyEvent } from "../../types/colonyEvent";
@@ -44,17 +44,22 @@ const getEventsByEventType = async (
 };
 
 export function useEventsList() {
+  // TODO: Use suspense for data fetching
+  // For now we use a ref to avoid double `useEffec` call
+  const canceled = useRef(false);
   const [events, setEvents] = useState<ColonyEvent[]>([]);
   const [loading, setLoading] = useState(true);
   const { client } = useColonyClient();
 
   useEffect(() => {
     async function load() {
-      if (!client) {
+      if (!client || canceled.current) {
         return;
       }
 
       setLoading(true);
+
+      canceled.current = true;
 
       const eventLogs = await Promise.all([
         getEventsByEventType(client, "ColonyInitialised"),
