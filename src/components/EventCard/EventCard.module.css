@@ -16,6 +16,10 @@
   box-shadow: 0 0 10px rgba(62, 118, 244, 0.14);
 }
 
+.root:hover {
+  background-color: rgba(255, 255, 255, .5);
+}
+
 li:first-child > .root {
   border-top-left-radius: var(--border-radius);
   border-top-right-radius: var(--border-radius);
