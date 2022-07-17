@@ -1,4 +1,4 @@
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import Blockies from "react-blockies";
 import { ColonyEvent } from "../../types/colonyEvent";
 import { AvatarSkeleton } from "../Skeleton/AvatarSkeleton";
@@ -12,12 +12,12 @@ export interface EventCardProps {
   avatarAddress?: string;
 }
 
-export function EventCard({
+export const EventCard: FC<EventCardProps> = ({
   event,
   children,
   loading = false,
   avatarAddress,
-}: EventCardProps) {
+}) => {
   const date = new Date(event.logTime);
   const dateTime = date.toISOString();
   const day = date.toLocaleString("en-US", { day: "numeric" });
@@ -42,4 +42,4 @@ export function EventCard({
       </time>
     </div>
   );
-}
+};

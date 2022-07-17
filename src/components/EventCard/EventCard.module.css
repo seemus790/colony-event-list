@@ -44,10 +44,11 @@ li:last-child > .root {
 .primary {
   grid-area: primary;
   align-self: center;
+
   overflow: hidden;
   white-space: nowrap;
-
   text-overflow: ellipsis;
+
   font-size: 0.875rem;
 }
 

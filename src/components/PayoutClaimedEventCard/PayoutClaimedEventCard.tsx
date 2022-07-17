@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { PayoutClaimedEvent } from "../../types/colonyEvent";
 import { EventCard } from "../EventCard/EventCard";
 import { ValueText } from "../ValueText/ValueText";
@@ -8,7 +8,9 @@ interface PayoutClaimedEventCardProps {
   event: PayoutClaimedEvent;
 }
 
-export function PayoutClaimedEventCard({ event }: PayoutClaimedEventCardProps) {
+export const PayoutClaimedEventCard: FC<PayoutClaimedEventCardProps> = ({
+  event,
+}) => {
   const { amount, fundingPotId, token, userAddress, loading } =
     usePayoutClaimedEventCard({ event });
 
@@ -21,4 +23,4 @@ export function PayoutClaimedEventCard({ event }: PayoutClaimedEventCardProps) {
       </span>
     </EventCard>
   );
-}
+};

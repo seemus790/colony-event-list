@@ -1,9 +1,9 @@
-import React from "react";
+import React, { FC } from "react";
 import { Route, Routes } from "react-router-dom";
 import { ColonyClientProvider } from "./providers/ColonyClientProvider/ColonyClientProvider";
 import { EventsList } from "./screens/EventsList/EventsList";
 
-function App() {
+const App: FC = () => {
   return (
     <div>
       <ColonyClientProvider>
@@ -13,6 +13,6 @@ function App() {
       </ColonyClientProvider>
     </div>
   );
-}
+};
 
 export default App;

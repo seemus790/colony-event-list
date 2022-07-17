@@ -1,10 +1,10 @@
-import React, { ReactNode } from "react";
+import React, { FC, ReactNode } from "react";
 import styles from "./ValueText.module.css";
 
 export interface ValueTextProps {
   children?: ReactNode;
 }
 
-export function ValueText({ children }: ValueTextProps) {
+export const ValueText: FC<ValueTextProps> = ({ children }) => {
   return <span className={styles.root}>{children}</span>;
-}
+};

@@ -35,7 +35,6 @@ const getEventsByEventType = async (
   return await Promise.all(
     logs.map(async (log) => ({
       type,
-      // TODO: Here we hit insura rate limit (429 Too Many Requests)?
       logTime: await getBlockTime(provider, log.blockHash),
       rawLog: log,
       parsedLog: client.interface.parseLog(log),
@@ -43,7 +42,7 @@ const getEventsByEventType = async (
   );
 };
 
-export function useEventsList() {
+export const useEventsList = () => {
   // TODO: Use suspense for data fetching
   // For now we use a ref to avoid double `useEffec` call
   const canceled = useRef(false);
@@ -52,7 +51,7 @@ export function useEventsList() {
   const { client } = useColonyClient();
 
   useEffect(() => {
-    async function load() {
+    const load = async () => {
       if (!client || canceled.current) {
         return;
       }
@@ -75,7 +74,7 @@ export function useEventsList() {
       setEvents(sortedEventLogs);
 
       setLoading(false);
-    }
+    };
 
     load();
   }, [client]);
@@ -84,4 +83,4 @@ export function useEventsList() {
     events,
     loading,
   };
-}
+};

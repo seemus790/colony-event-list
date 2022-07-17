@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { ValueText } from "../ValueText/ValueText";
 import { EventCard } from "../EventCard/EventCard";
 import { DomainAddedEvent } from "../../types/colonyEvent";
@@ -7,8 +7,9 @@ interface DomainAddedEventCardProps {
   event: DomainAddedEvent;
 }
 
-export function DomainAddedEventCard({ event }: DomainAddedEventCardProps) {
-  // TODO: Can we type `args`?
+export const DomainAddedEventCard: FC<DomainAddedEventCardProps> = ({
+  event,
+}) => {
   const domainId = event.parsedLog.args.domainId.toString();
 
   return (
@@ -18,4 +19,4 @@ export function DomainAddedEventCard({ event }: DomainAddedEventCardProps) {
       </span>
     </EventCard>
   );
-}
+};

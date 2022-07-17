@@ -21,7 +21,6 @@ export const usePayoutClaimedEventCard = ({
   const [userAddress, setUserAddress] = useState<string>();
 
   const amount = event.parsedLog.args.amount.div(wei.pow(18)).toString();
-  // TODO: Can we type `args`?
   const token = addressToTokenSymbol(event.parsedLog.args.token as string);
   const fundingPotId = event.parsedLog.args.fundingPotId.toString();
 

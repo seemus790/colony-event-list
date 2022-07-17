@@ -1,4 +1,4 @@
-import React from "react";
+import React, { FC } from "react";
 import { ColonyInitialisedEventCard } from "../../components/ColonyInitialisedEventCard/ColonyInitialisedEventCard";
 import { DomainAddedEventCard } from "../../components/DomainAddedEventCard/DomainAddedEventCard";
 import { PayoutClaimedEventCard } from "../../components/PayoutClaimedEventCard/PayoutClaimedEventCard";
@@ -7,7 +7,7 @@ import { ColonyEvent } from "../../types/colonyEvent";
 import { useEventsList } from "./useEventsList";
 import styles from "./EventsList.module.css";
 
-function renderEvent(event: ColonyEvent) {
+const renderEvent = (event: ColonyEvent) => {
   switch (event.type) {
     case "ColonyInitialised":
       return <ColonyInitialisedEventCard event={event} />;
@@ -20,9 +20,9 @@ function renderEvent(event: ColonyEvent) {
     default:
       return null;
   }
-}
+};
 
-export function EventsList() {
+export const EventsList: FC = () => {
   const { events, loading } = useEventsList();
 
   return (
@@ -40,4 +40,4 @@ export function EventsList() {
       )}
     </div>
   );
-}
+};

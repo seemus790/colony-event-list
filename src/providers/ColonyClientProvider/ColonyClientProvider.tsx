@@ -1,5 +1,6 @@
 import {
   createContext,
+  FC,
   ReactNode,
   useCallback,
   useContext,
@@ -30,11 +31,11 @@ interface ColonyClientProviderProps {
   children?: ReactNode;
 }
 
-export function ColonyClientProvider({
+export const ColonyClientProvider: FC<ColonyClientProviderProps> = ({
   children,
   mainnetBetaColonyAddress = MAINNET_BETACOLONY_ADDRESS,
   mainnetNetworkAddress = MAINNET_NETWORK_ADDRESS,
-}: ColonyClientProviderProps) {
+}) => {
   const wallet = useMemo(() => Wallet.createRandom().connect(provider), []);
 
   const colonyNetworkClient = useMemo(
@@ -68,6 +69,6 @@ export function ColonyClientProvider({
       {children}
     </ColonyClientContext.Provider>
   );
-}
+};
 
 export const useColonyClient = () => useContext(ColonyClientContext);

@@ -1,5 +1,4 @@
-import React from "react";
-import { ColonyRole } from "@colony/colony-js";
+import React, { FC } from "react";
 import { TaskRoleUserSetEvent } from "../../types/colonyEvent";
 import { EventCard } from "../EventCard/EventCard";
 import { ValueText } from "../ValueText/ValueText";
@@ -8,9 +7,9 @@ interface TaskRoleUserSetEventCardProps {
   event: TaskRoleUserSetEvent;
 }
 
-export function TaskRoleUserSetEventCard({
+export const TaskRoleUserSetEventCard: FC<TaskRoleUserSetEventCardProps> = ({
   event,
-}: TaskRoleUserSetEventCardProps) {
+}) => {
   const role = "role";
   const userAddress = "userAddress";
   const domainId = "domainId";
@@ -24,4 +23,4 @@ export function TaskRoleUserSetEventCard({
       </span>
     </EventCard>
   );
-}
+};
