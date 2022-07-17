@@ -36,8 +36,7 @@ const getEventsByEventType = async (
     logs.map(async (log) => ({
       type,
       // TODO: Here we hit insura rate limit (429 Too Many Requests)?
-      // logTime: await getBlockTime(provider, log.blockHash),
-      logTime: 1,
+      logTime: await getBlockTime(provider, log.blockHash),
       rawLog: log,
       parsedLog: client.interface.parseLog(log),
     }))
