@@ -5,7 +5,6 @@
 - Use suspense for fetching data and loading states
 - Ues error boundaries for graceful failures
 - Add examples on unit tests
-- Add "expaded" state for `<EventCard />`
 
 # Getting Started with Create React App
 

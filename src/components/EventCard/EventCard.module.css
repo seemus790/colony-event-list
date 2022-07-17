@@ -19,6 +19,7 @@
 .root:hover {
   background-color: rgba(255, 255, 255, 0);
   box-shadow: none;
+  height: auto;
 }
 
 li:first-child > .root {
@@ -35,6 +36,7 @@ li:last-child > .root {
   /* Half of avatar size */
   clip-path: circle(18.5px);
   grid-area: avatar;
+  align-self: flex-start;
 }
 
 .avatar > * {
@@ -50,6 +52,11 @@ li:last-child > .root {
   text-overflow: ellipsis;
 
   font-size: 0.875rem;
+}
+
+.root:hover .primary {
+  overflow: unset;
+  white-space: unset;
 }
 
 .secondary {
