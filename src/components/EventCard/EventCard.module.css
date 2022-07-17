@@ -2,13 +2,13 @@
   --border-radius: 6px;
 
   display: grid;
-  grid-template-areas: 
+  grid-template-areas:
     "avatar primary"
     "avatar secondary";
   grid-template-columns: auto 1fr;
   grid-template-rows: max-content;
   column-gap: 10px;
-  
+
   box-sizing: border-box;
   padding: 26px 20px;
   height: 90px;
@@ -17,7 +17,7 @@
 }
 
 .root:hover {
-  background-color: rgba(255, 255, 255, .5);
+  background-color: rgba(255, 255, 255, 0.5);
 }
 
 li:first-child > .root {
@@ -36,11 +36,10 @@ li:last-child > .root {
 }
 
 .primary {
-  
   grid-area: primary;
   overflow: hidden;
   white-space: nowrap;
-  
+
   text-overflow: ellipsis;
   font-size: 0.875rem;
 }
