@@ -45,7 +45,7 @@ const getEventsByEventType = async (
 
 export function useEventsList() {
   const [events, setEvents] = useState<ColonyEvent[]>([]);
-  const [loading, setIsLoading] = useState(true);
+  const [loading, setLoading] = useState(true);
   const { client } = useColonyClient();
 
   useEffect(() => {
@@ -54,7 +54,7 @@ export function useEventsList() {
         return;
       }
 
-      setIsLoading(true);
+      setLoading(true);
 
       const eventLogs = await Promise.all([
         getEventsByEventType(client, "ColonyInitialised"),
@@ -69,7 +69,7 @@ export function useEventsList() {
 
       setEvents(sortedEventLogs);
 
-      setIsLoading(false);
+      setLoading(false);
     }
 
     load();
