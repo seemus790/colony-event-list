@@ -31,8 +31,13 @@ li:last-child > .root {
 }
 
 .avatar {
-  border-radius: 50%;
+  /* Half of avatar size */
+  clip-path: circle(18.5px);
   grid-area: avatar;
+}
+
+.avatar > * {
+  display: block;
 }
 
 .primary {

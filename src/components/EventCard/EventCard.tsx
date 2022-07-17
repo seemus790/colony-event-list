@@ -1,28 +1,44 @@
 import React, { ReactNode } from "react";
 import Blockies from "react-blockies";
 import { ColonyEvent } from "../../types/colonyEvent";
+import { AvatarSkeleton } from "../Skeleton/AvatarSkeleton";
+import { TextSkeleton } from "../Skeleton/TextSkeleton";
 import styles from "./EventCard.module.css";
 
 export interface EventCardProps {
   event: ColonyEvent;
   children?: ReactNode;
+  loading?: boolean;
+  avatarAddress?: string;
 }
 
-export function EventCard({ event, children }: EventCardProps) {
+export function EventCard({
+  event,
+  children,
+  loading = false,
+  avatarAddress,
+}: EventCardProps) {
   const date = new Date(event.logTime);
+  const dateTime = date.toISOString();
+  const day = date.toLocaleString("en-US", { day: "numeric" });
+  const month = date.toLocaleString("en-US", { month: "short" });
+  const avatar = loading ? (
+    <AvatarSkeleton />
+  ) : (
+    <Blockies
+      scale={1}
+      seed={avatarAddress ?? event.rawLog.transactionHash}
+      size={37}
+    />
+  );
+  const primary = loading ? <TextSkeleton /> : children;
 
   return (
     <div className={styles.root}>
-      <Blockies
-        className={styles.avatar}
-        scale={1}
-        seed={event.rawLog.transactionHash}
-        size={37}
-      />
-      <div className={styles.primary}>{children}</div>
-      <time dateTime={date.toISOString()} className={styles.secondary}>
-        {date.toLocaleString("en-US", { day: "numeric" })}{" "}
-        {date.toLocaleString("en-US", { month: "short" })}
+      <div className={styles.avatar}>{avatar}</div>
+      <div className={styles.primary}>{primary}</div>
+      <time dateTime={dateTime} className={styles.secondary}>
+        {day} {month}
       </time>
     </div>
   );

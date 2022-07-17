@@ -9,11 +9,11 @@ interface PayoutClaimedEventCardProps {
 }
 
 export function PayoutClaimedEventCard({ event }: PayoutClaimedEventCardProps) {
-  const { amount, fundingPotId, token, userAddress } =
+  const { amount, fundingPotId, token, userAddress, loading } =
     usePayoutClaimedEventCard({ event });
 
   return (
-    <EventCard event={event}>
+    <EventCard event={event} loading={loading} avatarAddress={userAddress}>
       <span>
         User <ValueText>{userAddress}</ValueText> claimed{" "}
         <ValueText>{amount}</ValueText> <ValueText>{token}</ValueText> payout
