@@ -17,7 +17,8 @@
 }
 
 .root:hover {
-  background-color: rgba(255, 255, 255, 0.5);
+  background-color: rgba(255, 255, 255, 0);
+  box-shadow: none;
 }
 
 li:first-child > .root {
@@ -42,6 +43,7 @@ li:last-child > .root {
 
 .primary {
   grid-area: primary;
+  align-self: center;
   overflow: hidden;
   white-space: nowrap;
 
@@ -51,5 +53,6 @@ li:last-child > .root {
 
 .secondary {
   grid-area: secondary;
+  align-self: center;
   font-size: 0.75rem;
 }

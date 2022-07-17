@@ -1,5 +1,7 @@
 html {
   min-height: 100vh;
   background-image: linear-gradient(#f4f0f3, #eaf3f7);
+  background-attachment: fixed;
+  background-position: 0;
   font-family: "Mulish", sans-serif;
 }
