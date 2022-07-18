@@ -17,7 +17,7 @@ import { Wallet, providers } from "ethers";
 import {
   MAINNET_BETACOLONY_ADDRESS,
   MAINNET_NETWORK_ADDRESS,
-} from "../../constatns";
+} from "../../constants";
 
 export const provider = new providers.InfuraProvider();
 

@@ -11,15 +11,18 @@ interface ColonyRoleSetEventCardProps {
 export const ColonyRoleSetEventCard: FC<ColonyRoleSetEventCardProps> = ({
   event,
 }) => {
-  const { role, domainId, userAddress } = useColonyRoleSetEventCard({ event });
+  const { role, domainId, userAddress, date } = useColonyRoleSetEventCard({
+    event,
+  });
+  const primary = (
+    <>
+      <ValueText>{role}</ValueText> role assigned to user{" "}
+      <ValueText>{userAddress}</ValueText> in domain{" "}
+      <ValueText>{domainId}</ValueText>
+    </>
+  );
 
   return (
-    <EventCard event={event} avatarAddress={userAddress}>
-      <span>
-        <ValueText>{role}</ValueText> role assigned to user{" "}
-        <ValueText>{userAddress}</ValueText> in domain{" "}
-        <ValueText>{domainId}</ValueText>
-      </span>
-    </EventCard>
+    <EventCard avatarAddress={userAddress} primary={primary} secondary={date} />
   );
 };

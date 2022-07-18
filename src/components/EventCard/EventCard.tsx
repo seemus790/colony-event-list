@@ -1,37 +1,31 @@
 import React, { FC, ReactNode } from "react";
 import Blockies from "react-blockies";
-import { ColonyEvent } from "../../types/colonyEvent";
+import { AvatarSkeleton } from "../Skeleton/AvatarSkeleton";
+import { TextSkeleton } from "../Skeleton/TextSkeleton";
 import styles from "./EventCard.module.css";
 
 export interface EventCardProps {
-  event: ColonyEvent;
-  children?: ReactNode;
   avatarAddress?: string;
+  primary?: ReactNode;
+  secondary?: ReactNode;
 }
 
 export const EventCard: FC<EventCardProps> = ({
-  event,
-  children,
   avatarAddress,
-}) => {
-  const date = new Date(event.logTime);
-  const dateTime = date.toISOString();
-  const day = date.toLocaleString("en-US", { day: "numeric" });
-  const month = date.toLocaleString("en-US", { month: "short" });
-
-  return (
-    <div className={styles.root}>
-      <div className={styles.avatar}>
-        <Blockies
-          scale={1}
-          seed={avatarAddress ?? event.rawLog.transactionHash}
-          size={37}
-        />
-      </div>
-      <div className={styles.primary}>{children}</div>
-      <time dateTime={dateTime} className={styles.secondary}>
-        {day} {month}
-      </time>
+  primary,
+  secondary,
+}) => (
+  <div className={styles.root}>
+    <div className={styles.avatar}>
+      {avatarAddress ? (
+        <Blockies scale={1} size={37} seed={avatarAddress} />
+      ) : (
+        <AvatarSkeleton />
+      )}
     </div>
-  );
-};
+    <div className={styles.primary}>{primary ? primary : <TextSkeleton />}</div>
+    <time className={styles.secondary}>
+      {secondary ? secondary : <TextSkeleton />}
+    </time>
+  </div>
+);

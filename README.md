@@ -2,7 +2,6 @@
 
 ### TODO:
 
-- Use suspense for fetching data and loading states
 - Ues error boundaries for graceful failures
 - Add examples on unit tests
 

@@ -6,6 +6,7 @@ import { ColonyRoleSetEventCard } from "../../components/ColonyRoleSetEventCard/
 import { ColonyEvent } from "../../types/colonyEvent";
 import { useEventsList } from "./useEventsList";
 import styles from "./EventsList.module.css";
+import { EventCard } from "../../components/EventCard/EventCard";
 
 const renderEvent = (event: ColonyEvent) => {
   switch (event.type) {
@@ -30,7 +31,7 @@ export const EventsList: FC = () => {
       <ol className={styles.list}>
         {events.map((event) => (
           <li key={event.rawLog.transactionHash} className={styles.listItem}>
-            <Suspense fallback="Loading">{renderEvent(event)}</Suspense>
+            <Suspense fallback={<EventCard />}>{renderEvent(event)}</Suspense>
           </li>
         ))}
       </ol>
