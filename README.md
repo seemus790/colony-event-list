@@ -2,7 +2,6 @@
 
 ### TODO:
 
-- Ues error boundaries for graceful failures
 - Add examples on unit tests
 
 # Getting Started with Create React App
