@@ -11,7 +11,7 @@
 
   box-sizing: border-box;
   padding: 26px 20px;
-  height: 90px;
+  min-height: 90px;
   background-color: white;
   box-shadow: 0 0 10px rgba(62, 118, 244, 0.14);
 }
@@ -19,7 +19,6 @@
 .root:hover {
   background-color: rgba(255, 255, 255, 0);
   box-shadow: none;
-  height: auto;
 }
 
 li:first-child > .root {
@@ -63,4 +62,5 @@ li:last-child > .root {
   grid-area: secondary;
   align-self: center;
   font-size: 0.75rem;
+  color: #9393a3;
 }

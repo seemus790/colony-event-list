@@ -1,4 +1,3 @@
-import { useEffect, useRef, useState } from "react";
 import { BigNumber } from "ethers";
 import { addressToTokenSymbol } from "../../helpers/addressToTokenSymbol";
 import { useColonyClient } from "../../providers/ColonyClientProvider/ColonyClientProvider";
