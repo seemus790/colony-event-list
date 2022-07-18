@@ -1,4 +1,4 @@
-import React, { FC } from "react";
+import React, { FC, Suspense } from "react";
 import { ColonyInitialisedEventCard } from "../../components/ColonyInitialisedEventCard/ColonyInitialisedEventCard";
 import { DomainAddedEventCard } from "../../components/DomainAddedEventCard/DomainAddedEventCard";
 import { PayoutClaimedEventCard } from "../../components/PayoutClaimedEventCard/PayoutClaimedEventCard";
@@ -30,7 +30,7 @@ export const EventsList: FC = () => {
       <ol className={styles.list}>
         {events.map((event) => (
           <li key={event.rawLog.transactionHash} className={styles.listItem}>
-            {renderEvent(event)}
+            <Suspense fallback="Loading">{renderEvent(event)}</Suspense>
           </li>
         ))}
       </ol>

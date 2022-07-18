@@ -11,11 +11,11 @@ interface PayoutClaimedEventCardProps {
 export const PayoutClaimedEventCard: FC<PayoutClaimedEventCardProps> = ({
   event,
 }) => {
-  const { amount, fundingPotId, token, userAddress, loading } =
+  const { amount, fundingPotId, token, userAddress } =
     usePayoutClaimedEventCard({ event });
 
   return (
-    <EventCard event={event} loading={loading} avatarAddress={userAddress}>
+    <EventCard event={event} avatarAddress={userAddress}>
       <span>
         User <ValueText>{userAddress}</ValueText> claimed{" "}
         <ValueText>{amount}</ValueText> <ValueText>{token}</ValueText> payout
