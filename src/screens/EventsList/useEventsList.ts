@@ -1,6 +1,6 @@
-import { useEffect, useRef, useState } from "react";
 import { getLogs, getBlockTime, AnyColonyClient } from "@colony/colony-js";
 import { Filter } from "@ethersproject/providers";
+import usePromise from "react-promise-suspense";
 import { ColonyEvent } from "../../types/colonyEvent";
 import {
   useColonyClient,
@@ -44,45 +44,30 @@ const getEventsByEventType = async (
   );
 };
 
+const loadEvents = async (client: AnyColonyClient) => {
+  if (!client) {
+    return [];
+  }
+
+  const eventLogs = await Promise.all([
+    getEventsByEventType(client, "ColonyInitialised"),
+    getEventsByEventType(client, "DomainAdded"),
+    getEventsByEventType(client, "PayoutClaimed"),
+    getEventsByEventType(client, "ColonyRoleSet"),
+  ]);
+
+  const sortedEventLogs = eventLogs
+    .flat()
+    .sort((a, b) => b.logTime - a.logTime);
+
+  return sortedEventLogs;
+};
+
 export const useEventsList = () => {
-  // TODO: Use suspense for data fetching
-  // For now we use a ref to avoid double `useEffec` call
-  const canceled = useRef(false);
-  const [events, setEvents] = useState<ColonyEvent[]>([]);
-  const [loading, setLoading] = useState(true);
   const { client } = useColonyClient();
-
-  useEffect(() => {
-    const load = async () => {
-      if (!client || canceled.current) {
-        return;
-      }
-
-      setLoading(true);
-
-      canceled.current = true;
-
-      const eventLogs = await Promise.all([
-        getEventsByEventType(client, "ColonyInitialised"),
-        getEventsByEventType(client, "DomainAdded"),
-        getEventsByEventType(client, "PayoutClaimed"),
-        getEventsByEventType(client, "ColonyRoleSet"),
-      ]);
-
-      const sortedEventLogs = eventLogs
-        .flat()
-        .sort((a, b) => b.logTime - a.logTime);
-
-      setEvents(sortedEventLogs);
-
-      setLoading(false);
-    };
-
-    load();
-  }, [client]);
+  const events = usePromise(loadEvents, [client]) as ColonyEvent[];
 
   return {
     events,
-    loading,
   };
 };

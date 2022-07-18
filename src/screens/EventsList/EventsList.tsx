@@ -23,21 +23,17 @@ const renderEvent = (event: ColonyEvent) => {
 };
 
 export const EventsList: FC = () => {
-  const { events, loading } = useEventsList();
+  const { events } = useEventsList();
 
   return (
     <div className={styles.root}>
-      {loading ? (
-        <h1>Loading events</h1>
-      ) : (
-        <ol className={styles.list}>
-          {events.map((event) => (
-            <li key={event.rawLog.transactionHash} className={styles.listItem}>
-              {renderEvent(event)}
-            </li>
-          ))}
-        </ol>
-      )}
+      <ol className={styles.list}>
+        {events.map((event) => (
+          <li key={event.rawLog.transactionHash} className={styles.listItem}>
+            {renderEvent(event)}
+          </li>
+        ))}
+      </ol>
     </div>
   );
 };
